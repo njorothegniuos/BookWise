@@ -11,28 +11,12 @@ namespace BookWise.Domain.Common
     }
     public enum RecordStatus
     {
-        [Description("New")]
-        New = 0,
-        [Description("Edited")]
-        Edited = 1,
-        [Description("Approved")]
-        Approved = 2,
-        [Description("IsQueued")]
-        IsQueued = 3,
-        [Description("Rejected")]
-        Rejected = 4,
-        [Description("Posted")]
-        Posted = 5,
-        [Description("IsProcessed")]
-        IsProcessed = 6,
-        [Description("Failed")]
-        Failed = 7,
-        [Description("Extracted")]
-        Extracted = 8,
-        [Description("Text Alert Generated")]
-        TextAlertGenerated = 9,
-        [Description("Disabled")]
-        DisAbled = 10,
+        [Description("Available")]
+        Available = 0,
+        [Description("Reserved")]
+        Reserved = 1,
+        [Description("Borrowed")]
+        Borrowed = 2
     }
     public enum ServiceOrigin
     {
