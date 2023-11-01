@@ -18,6 +18,14 @@ namespace BookWise.Infrastructure
                      sqlOptions.MigrationsAssembly(typeof(IdentityDBContext).GetTypeInfo().Assembly.GetName().Name);
                  }));
 
+            services.AddDbContext<ApplicationDbContext>(options =>
+                 options.EnableSensitiveDataLogging(true).UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                 sqlServerOptionsAction: sqlOptions =>
+                 {
+                     options.EnableSensitiveDataLogging(false);
+                     sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).GetTypeInfo().Assembly.GetName().Name);
+                 }));
+
             return services;
         }
 

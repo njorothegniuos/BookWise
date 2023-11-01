@@ -1,11 +1,10 @@
 ﻿using Application.Abstractions.Messaging;
-using BookWise.Application.User.Queries.GetUserByEmail;
 using BookWise.Domain.Abstractions;
 using Mapster;
 
 namespace BookWise.Application.Book.Queries
 {
-    internal class SearchForABookQueryHandler : IQueryHandler<SearchForABookQuery, BookResponse>
+    internal class SearchForABookQueryHandler : IQueryHandler<SearchForABookQuery, BooksResponse>
     {
         private readonly IBookRepository _bookRepository;
 
@@ -14,13 +13,13 @@ namespace BookWise.Application.Book.Queries
             _bookRepository = bookRepository;
         }
 
-        public async Task<BookResponse> Handle(
-            SearchForABookQuery request,
-            CancellationToken cancellationToken)
+        public async Task<BooksResponse> Handle(
+           SearchForABookQuery request,
+           CancellationToken cancellationToken)
         {
-            var user = await _bookRepository.SearchForABook(request.Value);
-            var userResponse = user.Adapt<BookResponse>();
-            return userResponse;
+            var book = await _bookRepository.SearchForABook(request.Value);
+            var bookresponse = book.Adapt<BooksResponse>();
+            return bookresponse;
         }
     }
 }
