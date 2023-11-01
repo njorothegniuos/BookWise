@@ -5,8 +5,8 @@ namespace BookWise.Domain.Entities.BookModule
 {
     public class BookOrder : Entity
     {
-        public BookOrder(Guid id, Guid bookId, string userId, string reserveDate, 
-            string borrowedDate,string returnDate,RecordStatus recordStatus) : base(id)
+        public BookOrder(Guid id, Guid bookId, string userId, DateTime? reserveDate,
+            DateTime? borrowedDate, DateTime? returnDate,RecordStatus recordStatus) : base(id)
         {
             Id = id;
             BookId = bookId;
@@ -20,9 +20,9 @@ namespace BookWise.Domain.Entities.BookModule
         public Guid Id { get; set; }
         public Guid BookId { get; set; }
         public string UserId { get; set; }
-        public string ReserveDate { get; set; }
-        public string BorrowedDate { get; set; }
-        public string ReturnDate { get; set; }
+        public DateTime? ReserveDate { get; set; }
+        public DateTime? BorrowedDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
         public RecordStatus RecordStatus { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
