@@ -17,4 +17,8 @@
     <ProjectReference Include="..\BookWise.Domain\BookWise.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="BookOrder\Queries\" />
+  </ItemGroup>
+
 </Project>
