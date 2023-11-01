@@ -11,6 +11,7 @@ namespace BookWise.Infrastructure
         {
         }
         public DbSet<Book> Books { get; set; }
+        public DbSet<BookOrder> BookOrders { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
