@@ -9,6 +9,11 @@ namespace BookWise.Domain.Common
         Webapi,
         Regular
     }
+    public enum UserRecordStatus
+    {
+        [Description("Approved")]
+        Approved = 1
+    }
     public enum RecordStatus
     {
         [Description("Available")]

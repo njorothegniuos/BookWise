@@ -23,7 +23,7 @@ namespace Core.web.Mvc.Identity
                 user.EmailConfirmed = true;
                 user.PhoneNumberConfirmed = false;
                 user.CreatedDate = DateTime.Now;
-                user.RecordStatus = (byte)RecordStatus.Approved;
+                user.RecordStatus = (byte)UserRecordStatus.Approved;
                 user.IsEnabled = true;
                 user.IsExternalUser = false;
                 user.LastPasswordChangedDate = DateTime.Now;
@@ -59,7 +59,7 @@ namespace Core.web.Mvc.Identity
                 user.EmailConfirmed = true;
                 user.PhoneNumberConfirmed = false;
                 user.CreatedDate = DateTime.Now;
-                user.RecordStatus = (byte)RecordStatus.Approved;
+                user.RecordStatus = (byte)UserRecordStatus.Approved;
                 user.IsEnabled = true;
                 user.IsExternalUser = false;
                 user.LastPasswordChangedDate = DateTime.Now;
