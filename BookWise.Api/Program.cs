@@ -78,17 +78,17 @@ builder.Services.AddScoped<IUnitOfWork>(
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(config.GetConnectionString("AuthConnection")));
 
-builder.Services.AddMediatR(BookWise.Application.ApplicationAssembly.Instance);
+builder.Services.AddMediatR(BookWise.Application.AssemblyReference.Instance);
 
 builder
     .Services
     .AddControllers()
-    .AddApplicationPart(ApplicationAssembly.Instance);
+    .AddApplicationPart(AssemblyReference.Instance);
 
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
 builder.Services.AddValidatorsFromAssembly(
-    BookWise.Application.ApplicationAssembly.Instance,
+    BookWise.Application.AssemblyReference.Instance,
     includeInternalTypes: true);
 
 
