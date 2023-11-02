@@ -18,6 +18,7 @@ namespace BookWise.Web.Helpers
             var authorize = Attribute.GetCustomAttribute(RouteData.PageType, typeof(AuthorizeAttribute)) != null;
             if (authorize && AccountService.User == null)
             {
+                //ToDo: Resolve error on startup
                 var returnUrl = WebUtility.UrlEncode(new Uri(NavigationManager.Uri).PathAndQuery);
                 NavigationManager.NavigateTo("account/login");
             }

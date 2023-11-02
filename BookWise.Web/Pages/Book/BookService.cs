@@ -2,6 +2,8 @@
 {
     public class BookService
     {
+
+        //ToDO: Complete Book logic: View, search, reserve
         private static readonly string[] books = new[]
         {
         "The river between", "The river and the source", "Kifo kisimani", "Becoming CEO", "Power", "Warm", "Emotional intelligence in AI", "Embedded finance", "Generative AI", "AI and the future of employment"
