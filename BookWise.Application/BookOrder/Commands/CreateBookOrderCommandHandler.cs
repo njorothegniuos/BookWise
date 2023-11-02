@@ -7,11 +7,14 @@ namespace BookWise.Application.BookOrder.Commands
     internal class CreateBookOrderCommandHandler : ICommandHandler<CreateBookOrderCommand, Guid>
     {
         private readonly IBookOrderRepository _bookOrderRepository;
+        private readonly IBookRepository _bookRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CreateBookOrderCommandHandler(IBookOrderRepository bookOrderRepository, IUnitOfWork unitOfWork)
+        public CreateBookOrderCommandHandler(IBookOrderRepository bookOrderRepository, IBookRepository bookRepository,
+            IUnitOfWork unitOfWork)
         {
             _bookOrderRepository = bookOrderRepository;
+            _bookRepository= bookRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -19,7 +22,11 @@ namespace BookWise.Application.BookOrder.Commands
         {
             var _bookOrder = new Domain.Entities.BookModule.BookOrder(Guid.NewGuid(), request.BookId, request.UserId,
                 request.ReserveDate, request.BorrowedDate, request.ReturnDate,
-            RecordStatus.Available);
+            request.RecordStatus);
+
+            //ToDo: Handle book validation
+
+            //ToDo: Handle user validation
 
             _bookOrderRepository.Insert(_bookOrder);
 

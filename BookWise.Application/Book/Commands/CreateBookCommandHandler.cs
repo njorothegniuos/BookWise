@@ -17,7 +17,7 @@ namespace BookWise.Application.Book.Commands
 
         public async Task<Guid> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
-            var _book = new Domain.Entities.BookModule.Book( Guid.NewGuid(), request.Title, request.Author, request.ISBN, request.PublicationDate,
+            var _book = new Domain.Entities.BookModule.Book( Guid.NewGuid(), request.Title, request.Author, request.Isbn, request.PublicationDate,
             RecordStatus.Available);
 
             _bookRepository.Insert(_book);
