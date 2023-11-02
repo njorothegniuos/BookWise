@@ -9,8 +9,5 @@
         }
 
         public Guid Id { get; protected set; }
-
-        public byte RecordStatus { get; set; }
-        public DateTime createdAt { get; set; }
     }
 }

@@ -11,9 +11,11 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System.Data;
 using System.Text;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -70,13 +72,18 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = false;
 });
 
+builder.Services.AddScoped<IUnitOfWork>(
+            factory => factory.GetRequiredService<ApplicationDbContext>());
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(config.GetConnectionString("AuthConnection")));
 
 builder.Services.AddMediatR(BookWise.Application.ApplicationAssembly.Instance);
 
 builder
     .Services
     .AddControllers()
-    .AddApplicationPart(BookWise.Infrastructure.ApplicationAssembly.Instance);
+    .AddApplicationPart(ApplicationAssembly.Instance);
 
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
@@ -86,6 +93,8 @@ builder.Services.AddValidatorsFromAssembly(
 
 builder.Services.AddSingleton<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IBookOrderRepository, BookOrderRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

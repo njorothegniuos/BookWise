@@ -6,7 +6,7 @@ namespace BookWise.Infrastructure
 {
     public sealed class ApplicationDbContext : DbContext, IUnitOfWork
     {
-        public ApplicationDbContext(DbContextOptions options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }

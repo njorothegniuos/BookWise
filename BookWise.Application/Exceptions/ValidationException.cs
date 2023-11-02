@@ -1,8 +1,6 @@
-﻿
+﻿using BookWise.Domain.Exception.Base;
 
-using BookWise.Domain.Exception.Base;
-
-namespace Application.Exceptions
+namespace BookWise.Application.Exceptions
 {
     public sealed class ValidationException : BadRequestException
     {

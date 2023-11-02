@@ -1,7 +1,7 @@
 ﻿using Application.Abstractions.Messaging;
 using FluentValidation;
 using MediatR;
-using ValidationException = Application.Exceptions.ValidationException;
+using ValidationException = BookWise.Application.Exceptions.ValidationException;
 
 
 namespace Application.Behaviors
