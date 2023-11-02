@@ -91,10 +91,13 @@ builder.Services.AddValidatorsFromAssembly(
     BookWise.Application.ApplicationAssembly.Instance,
     includeInternalTypes: true);
 
-builder.Services.AddSingleton<ITokenService, TokenService>();
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IBookOrderRepository, BookOrderRepository>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -107,7 +110,7 @@ builder.Host.UseSerilog((context, configuration) =>
         .WriteTo.File(@"D:\Application\BookWise\API\Logs\" + DateTime.Now.ToString("yyyyMMdd") + @"\bookWise.api.log", rollingInterval: RollingInterval.Hour, outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}] [{Level:u3}] [{ClientIp}] [{RequestId}] [{RequestPath}] [{Message:lj}] [{Exception}]{NewLine}");
 });
 
-builder.Services.AddAuthorization();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
     opt.TokenValidationParameters = new()
@@ -116,11 +119,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration[""],
-        ValidAudience = builder.Configuration[""],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration[""]))
+        //set up validation data
+        ValidIssuer = config["Security:Issuer"],
+        ValidAudience = config["Security:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Security:Key"])),
+        ClockSkew = new TimeSpan(0)
     };
 });
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 

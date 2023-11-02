@@ -4,6 +4,8 @@ using BookWise.Application.Book.Queries;
 using Carter;
 using Mapster;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookWise.Api.Controllers
 {
@@ -16,6 +18,7 @@ namespace BookWise.Api.Controllers
             group.MapPost("", CreateBook);
             group.MapPost("/search", SearchForABookAsync);
         }
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,Roles = "SuperAdministrator")]
         public static async Task<IResult> CreateBook(BookRequest request,
             ISender sender, CancellationToken cancellationToken)
         {
@@ -23,7 +26,7 @@ namespace BookWise.Api.Controllers
             var response = await sender.Send(command, cancellationToken);
             return Results.Ok(response);
         }
-
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "SuperAdministrator,StandardUser")]
         public static async Task<IResult> SearchForABookAsync(string filter,
             ISender sender, CancellationToken cancellationToken)
         {

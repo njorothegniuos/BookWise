@@ -3,6 +3,8 @@ using BookWise.Application.BookOrder.Commands;
 using Carter;
 using Mapster;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookWise.Api.Controllers
 {
@@ -14,6 +16,7 @@ namespace BookWise.Api.Controllers
 
             group.MapPost("", CreateBookOrderAsync);
         }
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "SuperAdministrator")]
         public static async Task<IResult> CreateBookOrderAsync(BookOrderRequest request,
            ISender sender, CancellationToken cancellationToken)
         {

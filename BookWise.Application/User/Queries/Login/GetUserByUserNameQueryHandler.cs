@@ -11,13 +11,16 @@ namespace BookWise.Application.User.Queries.Login
     internal class GetUserByUserNameQueryHandler : IQueryHandler<GetUserByUserNameQuery, Results<Ok<TokenResponse>, BadRequest<string>>>
     {
         private readonly IUserRepository _userRepository;
+        private readonly IUserRoleRepository _userRoleRepository;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ITokenService _tokenService;
-        public GetUserByUserNameQueryHandler(IUserRepository userRepository, SignInManager<ApplicationUser> signInManager, ITokenService tokenService)
+        public GetUserByUserNameQueryHandler(IUserRepository userRepository, SignInManager<ApplicationUser> signInManager,
+            ITokenService tokenService, IUserRoleRepository userRoleRepository)
         {
             _userRepository = userRepository;
             _signInManager = signInManager;
             _tokenService = tokenService;
+            _userRoleRepository = userRoleRepository;
         }
 
         public async Task<Results<Ok<TokenResponse>, BadRequest<string>>> Handle(
@@ -31,7 +34,7 @@ namespace BookWise.Application.User.Queries.Login
 
                 if (signInStatus.Succeeded)
                 {
-                    return TypedResults.Ok(_tokenService.BuildToken());
+                    return TypedResults.Ok(await _tokenService.BuildToken(user.Id));
                 }
                 else { return TypedResults.BadRequest("Invalid credentials"); }
             }

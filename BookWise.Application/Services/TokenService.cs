@@ -1,4 +1,5 @@
 ﻿using BookWise.Application.User.Queries.Login;
+using BookWise.Domain.Abstractions;
 using BookWise.Domain.Common;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -11,12 +12,16 @@ namespace BookWise.Application.Services
     public class TokenService : ITokenService
     {
         private readonly IConfiguration _configuration;
-
-        public TokenService(IConfiguration configuration)
+        private readonly IUserRoleRepository _userRoleRepository;
+        private readonly IRoleRepository _roleRepository;
+        public TokenService(IConfiguration configuration, IRoleRepository roleRepository,
+            IUserRoleRepository userRoleRepository)
         {
             _configuration = configuration;
+            _roleRepository = roleRepository;
+            _userRoleRepository = userRoleRepository;
         }
-        public TokenResponse BuildToken()
+        public async Task<TokenResponse> BuildToken(string userId)
         {
             //security key for token validation
             SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Security:Key"]));
@@ -28,12 +33,21 @@ namespace BookWise.Application.Services
             DateTime expiryDate = baseDate.AddMinutes(Convert.ToInt32(_configuration["Security:TokenLifetimeInMins"]));
 
             Guid jti = Guid.NewGuid();
-            //add claims
-            List<Claim> claims = new List<Claim>
+
+            //GET ROLES 
+            var _roles = await _userRoleRepository.GetUserRole(userId);
+            List<Claim> claims = new List<Claim>();
+            foreach (var role in _roles)
             {
+                //add claims
+                claims = new List<Claim>
+                {
                 new Claim(JwtRegisteredClaimNames.Jti, $"{jti}"),
                 new Claim("cli", Guid.NewGuid().ToString()),
-            };
+                    new Claim(ClaimTypes.Role, role),
+                };
+            }
+
 
             //create token
             JwtSecurityToken jwtToken = new JwtSecurityToken(
