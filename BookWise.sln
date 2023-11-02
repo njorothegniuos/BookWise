@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4C2D8CDF-1269-4E1F-8D41-C99741AF36CE}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\MobileMoneyConsumerToBusiness\MobileMoneyConsumerToBusiness\README.md = ..\..\MobileMoneyConsumerToBusiness\MobileMoneyConsumerToBusiness\README.md
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookWise.Domain", "BookWise.Domain\BookWise.Domain.csproj", "{7A60CE3C-D171-4B26-B86A-7169F3745A56}"
 EndProject
