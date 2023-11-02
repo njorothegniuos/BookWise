@@ -33,35 +33,40 @@ namespace BookWise.Application.Services
             DateTime expiryDate = baseDate.AddMinutes(Convert.ToInt32(_configuration["Security:TokenLifetimeInMins"]));
 
             Guid jti = Guid.NewGuid();
-
+            List<Claim> claims = new List<Claim>();
             //GET ROLES 
             var _roles = await _userRoleRepository.GetUserRole(userId);
-            List<Claim> claims = new List<Claim>();
-            foreach (var role in _roles)
-            {
-                //add claims
-                claims = new List<Claim>
+            if (_roles != null && _roles.Count > 0)
+            {              
+                foreach (var role in _roles)
+                {
+                    //add claims
+                    claims = new List<Claim>
                 {
                 new Claim(JwtRegisteredClaimNames.Jti, $"{jti}"),
                 new Claim("cli", Guid.NewGuid().ToString()),
                     new Claim(ClaimTypes.Role, role),
                 };
+                }
+
+                //create token
+                JwtSecurityToken jwtToken = new JwtSecurityToken(
+                    issuer: _configuration["Security:Issuer"],
+                    audience: _configuration["Security:Audience"],
+                    signingCredentials: signingCredentials,
+                    expires: expiryDate,
+                    notBefore: baseDate,
+                    claims: claims);
+
+                string generatedToken = new JwtSecurityTokenHandler().WriteToken(jwtToken);
+
+                TokenResponse tokenResponse = new TokenResponse(generatedToken, expiryDate.ToEpoch(), "Bearer");
+                return tokenResponse;
             }
-
-
-            //create token
-            JwtSecurityToken jwtToken = new JwtSecurityToken(
-                issuer: _configuration["Security:Issuer"],
-                audience: _configuration["Security:Audience"],
-                signingCredentials: signingCredentials,
-                expires: expiryDate,
-                notBefore: baseDate,
-                claims: claims);
-
-            string generatedToken = new JwtSecurityTokenHandler().WriteToken(jwtToken);
-
-            TokenResponse tokenResponse = new TokenResponse(generatedToken, expiryDate.ToEpoch(), "Bearer");
-            return tokenResponse;
+            else
+            {
+                return null;
+            }
         }
     }
 }

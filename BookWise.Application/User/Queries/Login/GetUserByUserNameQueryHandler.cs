@@ -34,7 +34,11 @@ namespace BookWise.Application.User.Queries.Login
 
                 if (signInStatus.Succeeded)
                 {
-                    return TypedResults.Ok(await _tokenService.BuildToken(user.Id));
+                    var token = await _tokenService.BuildToken(user.Id);
+                    if (token != null)
+                        return TypedResults.Ok(token);
+                    else
+                        return TypedResults.BadRequest("Invalid credentials");
                 }
                 else { return TypedResults.BadRequest("Invalid credentials"); }
             }
