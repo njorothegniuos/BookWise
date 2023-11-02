@@ -1,0 +1,47 @@
+﻿@page "/fetchbooks"
+@using BookWise.Web.Data.BookModule
+@inject BookService BookService
+
+<PageTitle>Books</PageTitle>
+
+<h1>List</h1>
+
+<p>Books listing.</p>
+
+@if (books == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Isbn</th>
+                <th>PublicationDate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in books)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Isbn</td>
+                    <td>@book.PublicationDate.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Book[]? books;
+
+    protected override async Task OnInitializedAsync()
+    {
+        books = await BookService.GetBookstAsync();
+    }
+}

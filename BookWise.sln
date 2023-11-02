@@ -4,18 +4,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4C2D8CDF-1269-4E1F-8D41-C99741AF36CE}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\MobileMoneyConsumerToBusiness\MobileMoneyConsumerToBusiness\README.md = ..\..\MobileMoneyConsumerToBusiness\MobileMoneyConsumerToBusiness\README.md
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookWise.Domain", "BookWise.Domain\BookWise.Domain.csproj", "{7A60CE3C-D171-4B26-B86A-7169F3745A56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookWise.Domain", "BookWise.Domain\BookWise.Domain.csproj", "{7A60CE3C-D171-4B26-B86A-7169F3745A56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookWise.Application", "BookWise.Application\BookWise.Application.csproj", "{D82B5A32-F728-4915-BB90-E6627D2E7EF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookWise.Application", "BookWise.Application\BookWise.Application.csproj", "{D82B5A32-F728-4915-BB90-E6627D2E7EF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookWise.Infrastructure", "BookWise.Infrastructure\BookWise.Infrastructure.csproj", "{56369263-0A8A-47C9-A4A6-75160B1DAA59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookWise.Infrastructure", "BookWise.Infrastructure\BookWise.Infrastructure.csproj", "{56369263-0A8A-47C9-A4A6-75160B1DAA59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookWise.Presentation", "BookWise.Presentation\BookWise.Presentation.csproj", "{EDA11265-9F27-4D5A-88BC-F747898DC299}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookWise.Web", "BookWise.Web\BookWise.Web.csproj", "{95135410-5242-4B27-A051-6140554B4E4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookWise.Web", "BookWise.Web\BookWise.Web.csproj", "{95135410-5242-4B27-A051-6140554B4E4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookWise.Api", "BookWise.Api\BookWise.Api.csproj", "{0A00EF32-510A-4BBD-BDB0-D67B39BDC30C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookWise.Api", "BookWise.Api\BookWise.Api.csproj", "{0A00EF32-510A-4BBD-BDB0-D67B39BDC30C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{582BD2A1-1ED8-4992-A378-D7075C51A2DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookWiseService", "BookWiseService\BookWiseService.csproj", "{EDBE75F3-D9E8-4CD8-B073-A2163D5CB6A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{95315EB3-8614-427B-98E2-216FC9C01B03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Architecture.Tests", "Architecture.Tests\Architecture.Tests.csproj", "{E77973DE-24D8-4B72-BDA1-CDE420ADEC4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +44,6 @@ Global
 		{56369263-0A8A-47C9-A4A6-75160B1DAA59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56369263-0A8A-47C9-A4A6-75160B1DAA59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56369263-0A8A-47C9-A4A6-75160B1DAA59}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EDA11265-9F27-4D5A-88BC-F747898DC299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EDA11265-9F27-4D5A-88BC-F747898DC299}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EDA11265-9F27-4D5A-88BC-F747898DC299}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EDA11265-9F27-4D5A-88BC-F747898DC299}.Release|Any CPU.Build.0 = Release|Any CPU
 		{95135410-5242-4B27-A051-6140554B4E4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{95135410-5242-4B27-A051-6140554B4E4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95135410-5242-4B27-A051-6140554B4E4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,6 +52,14 @@ Global
 		{0A00EF32-510A-4BBD-BDB0-D67B39BDC30C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A00EF32-510A-4BBD-BDB0-D67B39BDC30C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A00EF32-510A-4BBD-BDB0-D67B39BDC30C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDBE75F3-D9E8-4CD8-B073-A2163D5CB6A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDBE75F3-D9E8-4CD8-B073-A2163D5CB6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDBE75F3-D9E8-4CD8-B073-A2163D5CB6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDBE75F3-D9E8-4CD8-B073-A2163D5CB6A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E77973DE-24D8-4B72-BDA1-CDE420ADEC4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E77973DE-24D8-4B72-BDA1-CDE420ADEC4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E77973DE-24D8-4B72-BDA1-CDE420ADEC4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E77973DE-24D8-4B72-BDA1-CDE420ADEC4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,9 +68,11 @@ Global
 		{7A60CE3C-D171-4B26-B86A-7169F3745A56} = {4C2D8CDF-1269-4E1F-8D41-C99741AF36CE}
 		{D82B5A32-F728-4915-BB90-E6627D2E7EF2} = {4C2D8CDF-1269-4E1F-8D41-C99741AF36CE}
 		{56369263-0A8A-47C9-A4A6-75160B1DAA59} = {4C2D8CDF-1269-4E1F-8D41-C99741AF36CE}
-		{EDA11265-9F27-4D5A-88BC-F747898DC299} = {4C2D8CDF-1269-4E1F-8D41-C99741AF36CE}
 		{95135410-5242-4B27-A051-6140554B4E4B} = {4C2D8CDF-1269-4E1F-8D41-C99741AF36CE}
 		{0A00EF32-510A-4BBD-BDB0-D67B39BDC30C} = {4C2D8CDF-1269-4E1F-8D41-C99741AF36CE}
+		{582BD2A1-1ED8-4992-A378-D7075C51A2DD} = {4C2D8CDF-1269-4E1F-8D41-C99741AF36CE}
+		{EDBE75F3-D9E8-4CD8-B073-A2163D5CB6A5} = {582BD2A1-1ED8-4992-A378-D7075C51A2DD}
+		{E77973DE-24D8-4B72-BDA1-CDE420ADEC4B} = {95315EB3-8614-427B-98E2-216FC9C01B03}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E7C3A22-8271-461D-9D57-3989F59FDB29}
